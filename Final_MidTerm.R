@@ -15,7 +15,6 @@ write.csv(finaldata, file="NewADS.csv")
 
 data3 <- read.csv('C:/Users/gadep/OneDrive/Desktop/ADS/datanew.csv')
 
-
 #DatatypeIdentification
 
 str(data3)
@@ -35,7 +34,6 @@ library(tidyr)
 library(ggplot2)
 library(tidyverse)
 library(lubridate)
-
 
 #distribution in histogram based on age
 data4 <- read.csv('C:/Users/gadep/OneDrive/Desktop/ADS/DirtyData.csv')
@@ -58,7 +56,6 @@ g_age + geom_density(col="orange", aes(fill = Preferred.Positions), alpha=0.5) +
 
 ggplot(data3,aes(x=Overall.x,y=Value)) + geom_point(alpha=0.3) + 
   labs(x='Overall Rating',y='Value',title='Comparing Market Value of Players with Overall Rating')
-
 
 #Divide FIFA 18-19 into training and test datasets (80%/20%)
 set.seed(1)
@@ -119,7 +116,6 @@ rmse(rpart_prediction,pca_test_y)
 #linear regression
 LinearRegression = lm(Value ~ . ,data = train )
 summary(LinearRegression)
-
 
 # Checking for correlation
 # Correlation heatmap
@@ -217,17 +213,13 @@ str(data3)
 summary(data3)
 summary(train)
 
-
-
 fit.rf <- randomForest(formula = Value ~., data = train)
 pred.rf <- predict(fit.rf, test)
-
 
 rmse.rf <- sqrt(mean(((pred.rf) - test$Value)^2))
 (rmse.rf)
 c(RMSE = rmse.rf, pseudoR2 = mean(fit.rf$rsq))
 plot(pred.rf,test$Value, xlab = "Error", ylab = "Value", pch = 3)
-
 
 #Random forest prediction
 library(Metrics)
@@ -239,8 +231,6 @@ summary(fit.rf)
 accuracytable = table(test$Value, pred.rf)
 accuracy=sum(diag(accuracytable))/sum(accuracytable)*100
 accuracy
-
-
 
 #R Square Error
 rr <- train$Value - predict(fit.rf)
@@ -277,11 +267,3 @@ predict.xgb <- predict(data.xgb, data.matrix(subset(test_data,select=-c(Value)))
 summary(predict.xgb)
 rmse.xgb <- rmse(as.matrix(test_data["Value"]), as.matrix(predict.xgb))
 rmse.xgb
-
-
-
-
-
-
-
-
